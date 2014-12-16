@@ -45,4 +45,18 @@ class RationalJUnitTests {
     assert(r2.reciprocal() == new Rational(64, -11))
     assert(r2.negate() == new Rational(11, 64))
   }
+
+  @Test
+  def TestComparisons() {
+    val r1 = new Rational(-3, 6);
+    val r2 = new Rational(2, 4);
+    val r3 = new Rational(1, 2);
+    assert(r1 < r2)
+    assert(r1 <= r2)
+    assert(r2 > r1)
+    assert(r2 >= r1)
+    assert(r2 == r3)
+    assert(r2 <= r3)
+    assert(r3 >= r2)
+  }
 }
