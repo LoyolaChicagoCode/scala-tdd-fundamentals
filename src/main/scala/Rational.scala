@@ -64,5 +64,13 @@ class Rational(n: Int, d: Int) {
   def <=(that: Rational) =
     this < that || this == that
 
+  // need proper object equality for matchers
+  override def equals(o: Any) = o match {
+    case that: Rational => this == that
+    case _ => false
+  }
+
+  override def hashCode = (numerator.hashCode, denominator.hashCode) hashCode
+
 }
 // end-Rational
