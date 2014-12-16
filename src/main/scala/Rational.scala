@@ -8,6 +8,8 @@ package scalatddpackt
  * which includes an elaboration of other needed methods and full unit tests.
  * source: http://introcs.cs.luc.edu
  */
+
+// begin-Rational-gcd
 object MathUtility {
   def gcd(x: Int, y: Int): Int = {
     if (x == 0) y
@@ -16,7 +18,9 @@ object MathUtility {
     else gcd(y % x, x)
   }
 }
+// end-Rational-gcd
 
+// begin-Rational
 class Rational(n: Int, d: Int) {
 
   private val g = MathUtility.gcd(n, d)
@@ -61,3 +65,4 @@ class Rational(n: Int, d: Int) {
     this < that || this == that
 
 }
+// end-Rational
