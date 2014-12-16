@@ -5,7 +5,7 @@ import org.junit.Test
 import org.junit.Assert._
 
 
-class RationalTests {
+class RationalJUnitTests {
 
   @Test
   def testMathUtilities(): Unit = {
