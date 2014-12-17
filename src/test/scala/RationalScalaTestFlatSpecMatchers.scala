@@ -33,7 +33,7 @@ class RationalScalaTestFlatSpecMatchers extends FlatSpec with Matchers {
     r1.denominator should be (2)
   }
 
-  "Essential Arithmetic" should "perform addition" in {
+  "Arithmetic" should "perform addition" in {
     val r1 = new Rational(47, 64)
     val r2 = new Rational(-11, 64)
     r1 + r2 should === (new Rational(36, 64))
@@ -69,7 +69,7 @@ class RationalScalaTestFlatSpecMatchers extends FlatSpec with Matchers {
     r1.negate() should be (new Rational(-47, 64))
   }
 
-  "Essential Comparisons" should "perform ==" in {
+  "Comparisons" should "perform ==" in {
     val r1 = new Rational(2, 4)
     val r2 = new Rational(1, 2)
     assert(r1 == r2)
@@ -80,7 +80,7 @@ class RationalScalaTestFlatSpecMatchers extends FlatSpec with Matchers {
     info("hashcode() works")
 
   }
-  "Essential Comparisons" should "perform <" in {
+  it should "perform <" in {
     val r1 = new Rational(-3, 6)
     val r2 = new Rational(2, 4)
     assert(r1 < r2)
@@ -113,4 +113,6 @@ class RationalScalaTestFlatSpecMatchers extends FlatSpec with Matchers {
     assert(r2 >= r3)
     info("operator >= works for == case")
   }
+
+  // End-Tests
 }

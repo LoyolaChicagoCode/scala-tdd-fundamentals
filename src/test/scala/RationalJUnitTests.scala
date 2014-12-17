@@ -7,6 +7,7 @@ import org.junit.Assert._
 
 class RationalJUnitTests {
 
+  // RationalJUnitTests.gcd
   @Test
   def testMathUtilities(): Unit = {
     assertEquals(3, MathUtility.gcd(3, 6))
@@ -18,6 +19,7 @@ class RationalJUnitTests {
     assertEquals(1, MathUtility.gcd(5, 1));
   }
 
+  // RationalJUnitTests.Initialization
   @Test
   def testInitialization(): Unit = {
     val r1 = new Rational(2, 4)
@@ -33,6 +35,7 @@ class RationalJUnitTests {
     assertEquals(2, r3.denominator)
   }
 
+  // RationalJUnitTests.Arithmetic
   @Test
   def TestArithmetic(): Unit = {
     val r1 = new Rational(47, 64)
@@ -46,6 +49,7 @@ class RationalJUnitTests {
     assert(r2.negate() == new Rational(11, 64))
   }
 
+  // RationalJUnitTests.Comparisons
   @Test
   def TestComparisons() {
     val r1 = new Rational(-3, 6);
@@ -59,4 +63,5 @@ class RationalJUnitTests {
     assert(r2 <= r3)
     assert(r3 >= r2)
   }
+  // RationalJUnitTests.Done
 }

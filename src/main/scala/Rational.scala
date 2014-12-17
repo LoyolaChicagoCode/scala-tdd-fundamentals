@@ -9,7 +9,7 @@ package scalatddpackt
  * source: http://introcs.cs.luc.edu
  */
 
-// begin-Rational-gcd
+// begin-RationalMathUtility-gcd
 object MathUtility {
   def gcd(x: Int, y: Int): Int = {
     if (x == 0) y
@@ -18,16 +18,18 @@ object MathUtility {
     else gcd(y % x, x)
   }
 }
-// end-Rational-gcd
+// end-RationalMathUtility-gcd
 
-// begin-Rational
+// begin-RationalClass
 class Rational(n: Int, d: Int) {
 
   private val g = MathUtility.gcd(n, d)
 
+  // RationalClass.Initialization
   val numerator: Int = n / g
   val denominator: Int = d / g
 
+  // RationalClass.Arithmetic
   def +(that: Rational) =
     new Rational(numerator * that.denominator + that.numerator * denominator,
       denominator * that.denominator)
@@ -42,15 +44,16 @@ class Rational(n: Int, d: Int) {
   def /(that: Rational) =
     new Rational(numerator * that.denominator, denominator * that.numerator)
 
-  def compare(that: Rational) = numerator * that.denominator - that.numerator * denominator
-
-  def ==(that: Rational) = compare(that) == 0
-
   def reciprocal() =
     new Rational(denominator, numerator)
 
   def negate() =
     new Rational(-numerator, denominator)
+
+  // RationalClass.Comparisons
+  def compare(that: Rational) = numerator * that.denominator - that.numerator * denominator
+
+  def ==(that: Rational) = compare(that) == 0
 
   def >(that: Rational) =
     compare(that) > 0
@@ -64,7 +67,7 @@ class Rational(n: Int, d: Int) {
   def <=(that: Rational) =
     this < that || this == that
 
-  // need proper object equality for matchers
+  // RationalClass.Objects
   override def equals(o: Any) = o match {
     case that: Rational => this == that
     case _ => false
@@ -72,5 +75,6 @@ class Rational(n: Int, d: Int) {
 
   override def hashCode = (numerator.hashCode, denominator.hashCode) hashCode
 
+  // RationalClass.Done
 }
-// end-Rational
+// end-RationalClass
