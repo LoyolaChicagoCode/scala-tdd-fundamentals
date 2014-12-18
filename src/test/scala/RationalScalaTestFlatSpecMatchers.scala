@@ -71,55 +71,70 @@ class RationalScalaTestFlatSpecMatchers extends FlatSpec with Matchers {
   "Comparisons" should "perform ==" in {
     val r1 = new Rational(2, 4)
     val r2 = new Rational(1, 2)
-    assert(r1 == r2)
     info("numeric equality (==) works")
-    assert(r1.equals(r2))
+    assert(r1 == r2)
     info("object equality works, e.g. equals()")
-    assert(r1.hashCode() == r2.hashCode())
+    assert(r1.equals(r2))
     info("hashcode() works")
+    assert(r1.hashCode() == r2.hashCode())
 
   }
   it should "perform <" in {
     val r1 = new Rational(-3, 6)
     val r2 = new Rational(2, 4)
-    assert(r1 < r2)
     info("operator < works")
+    assert(r1 < r2)
   }
 
   it should "perform >" in {
     val r1 = new Rational(-3, 6)
     val r2 = new Rational(2, 4)
-    assert(r2 > r1)
     info("operator > works")
+    assert(r2 > r1)
   }
 
   it should "perform <= for something < and for something =" in {
     val r1 = new Rational(-3, 6)
     val r2 = new Rational(2, 4)
     val r3 = new Rational(1, 2)
-    assert(r1 <= r2)
     info("operator <= works for < case")
-    assert(r2 <= r3)
+    assert(r1 <= r2)
     info("operator <= works for == case")
+    assert(r2 <= r3)
   }
 
   it should "perform >= for something > and for something =" in {
     val r1 = new Rational(-3, 6)
     val r2 = new Rational(2, 4)
     val r3 = new Rational(1, 2)
-    assert(r2 >= r1)
     info("operator >= works for > case")
-    assert(r2 >= r3)
+    assert(r2 >= r1)
     info("operator >= works for == case")
+    assert(r2 >= r3)
+  }
+
+  "Within collections" should "work" in {
+    info("on Set[Rational]")
+    val r1 = new Rational(-3, 6)
+    val r2 = new Rational(2, 4)
+    val r3 = new Rational(1, 2)
+    val s = Set(r1, r2, r3)
+    assert(s.size == 2)
+  }
+
+  "Pattern matching" should "work" in {
+    Rational(3, 9) match {
+      case Rational(1, 3) => ()
+    }
+  }
+
+  it should "not work" in {
+    Rational(3, 9) match {
+      case Rational(2, 4) => ??? // Not implemented
+      case _ => ()
+    }
   }
 
   // End-Tests
 
-  "Pattern matching" should "work" in {
-    val (n, d) = Rational(3, 9) match {
-      case Rational(x, y) => (x, y)
-    }
-    assert(n === 1)
-    assert(d === 3)
-  }
 }
