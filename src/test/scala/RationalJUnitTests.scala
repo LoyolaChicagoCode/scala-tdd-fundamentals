@@ -1,8 +1,10 @@
-package scalatddpackt;
+package scalatddpackt
 
 import org.junit._
 import org.junit.Test
 import org.junit.Assert._
+
+import rational._
 
 
 class RationalJUnitTests {
@@ -10,13 +12,13 @@ class RationalJUnitTests {
   // RationalJUnitTests.gcd
   @Test
   def testMathUtilities(): Unit = {
-    assertEquals(3, MathUtility.gcd(3, 6))
-    assertEquals(3, MathUtility.gcd(-3, 6))
-    assertEquals(-3, MathUtility.gcd(-3, -6))
-    assertEquals(5, MathUtility.gcd(0, 5));
-    assertEquals(5, MathUtility.gcd(5, 0));
-    assertEquals(1, MathUtility.gcd(1, 5));
-    assertEquals(1, MathUtility.gcd(5, 1));
+    assertEquals(3, gcd(3, 6))
+    assertEquals(3, gcd(-3, 6))
+    assertEquals(-3, gcd(-3, -6))
+    assertEquals(5, gcd(0, 5))
+    assertEquals(5, gcd(5, 0))
+    assertEquals(1, gcd(1, 5))
+    assertEquals(1, gcd(5, 1))
   }
 
   // RationalJUnitTests.Initialization
@@ -52,9 +54,9 @@ class RationalJUnitTests {
   // RationalJUnitTests.Comparisons
   @Test
   def TestComparisons() {
-    val r1 = new Rational(-3, 6);
-    val r2 = new Rational(2, 4);
-    val r3 = new Rational(1, 2);
+    val r1 = new Rational(-3, 6)
+    val r2 = new Rational(2, 4)
+    val r3 = new Rational(1, 2)
     assert(r1 < r2)
     assert(r1 <= r2)
     assert(r2 > r1)
