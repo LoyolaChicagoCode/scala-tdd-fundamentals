@@ -35,6 +35,8 @@ package object rational {
     // RationalClass.Initialization
     val numerator: Int = n / g
     val denominator: Int = d / g
+    if (denominator == 0)
+      throw new ArithmeticException()
 
     // RationalClass.Arithmetic
     def +(that: Rational) =

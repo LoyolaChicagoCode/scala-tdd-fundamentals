@@ -6,6 +6,7 @@ import rational._
 
 class RationalScalaTestFlatSpecMatchers extends FlatSpec with Matchers {
 
+  // RationalFlatSpec.GCD
   "GCD involving 0" should "give y for gcd(0, y)" in {
     gcd(0, 5) should be (5)
   }
@@ -14,24 +15,39 @@ class RationalScalaTestFlatSpecMatchers extends FlatSpec with Matchers {
     gcd(0, 5) should be (5)
   }
 
-  "Initializing" should "reduce 2/4 to 1/2" in {
+  "GCD not involving 0" should "be 3" in {
+    gcd(3*1, 3*3) should be (3)
+  }
+
+  it should "be 5" in {
+    gcd(5*1, 5*5) should be (5)
+  }
+  // RationalFlatSpec.Initializing
+  "Initializing" should "reduce positive numerator and positive denominator" in {
     val r1 = new Rational(2, 4)
     r1.numerator should be (1)
     r1.denominator should be (2)
   }
 
-  it should "reduce -2/4 to -1/2" in {
+  it should "reduce negative numerator and positive denominator" in {
     val r1 = new Rational(-2, 4)
     r1.numerator should be (-1)
     r1.denominator should be (2)
   }
 
-  it should "reduce -3/-6 to 1/2" in {
+  it should "reduce negative numerator and negative denominator" in {
     val r1 = new Rational(-3, -6)
     r1.numerator should be (1)
     r1.denominator should be (2)
   }
 
+  it should "not allow a zero denominator" in {
+    intercept[ArithmeticException] {
+      new Rational(3, 0)
+    }
+  }
+
+  // RationalFlatSpec.Arithmetic
   "Arithmetic" should "perform addition" in {
     val r1 = new Rational(47, 64)
     val r2 = new Rational(-11, 64)
@@ -67,6 +83,8 @@ class RationalScalaTestFlatSpecMatchers extends FlatSpec with Matchers {
     val r2 = new Rational(-11, 64)
     r1.negate() should be (new Rational(-47, 64))
   }
+
+  // RationalFlatSpec.Comparisons
 
   "Comparisons" should "perform ==" in {
     val r1 = new Rational(2, 4)
@@ -113,6 +131,7 @@ class RationalScalaTestFlatSpecMatchers extends FlatSpec with Matchers {
     assert(r2 >= r3)
   }
 
+  // RationalFlatSpec.Collectionss
   "Within collections" should "work" in {
     info("on Set[Rational]")
     val r1 = new Rational(-3, 6)
@@ -122,6 +141,7 @@ class RationalScalaTestFlatSpecMatchers extends FlatSpec with Matchers {
     assert(s.size == 2)
   }
 
+  // RationalFlatSpec.PatternMatching
   "Pattern matching" should "work" in {
     Rational(3, 9) match {
       case Rational(1, 3) => ()
@@ -135,6 +155,6 @@ class RationalScalaTestFlatSpecMatchers extends FlatSpec with Matchers {
     }
   }
 
-  // End-Tests
+  // RationalFlatSpec.End
 
 }
