@@ -26,7 +26,7 @@ package object rational {
   object Rational {
     def apply(n: Int, d: Int) = new Rational(n, d)
 
-    def unapply(r: Rational): Option[(Int, Int)] = Some((r.numerator, r.denominator))
+    def unapply(r: Rational): Option[(Int, Int)] = Some((r._n, r._d))
   }
   // end-RationalObject
 
@@ -36,34 +36,34 @@ package object rational {
     private val g = gcd(n, d)
 
     // RationalClass.Initialization
-    val numerator: Int = n / g
-    val denominator: Int = d / g
-    if (denominator == 0)
+    val _n: Int = n / g
+    val _d: Int = d / g
+    if (_d == 0)
       throw new ArithmeticException()
 
     // RationalClass.Arithmetic
     def +(that: Rational) =
-      new Rational(numerator * that.denominator + that.numerator * denominator,
-        denominator * that.denominator)
+      new Rational(_n * that._d + that._n * _d,
+        _d * that._d)
 
     def -(that: Rational) =
-      new Rational(numerator * that.denominator - that.numerator * denominator,
-        denominator * that.denominator)
+      new Rational(_n * that._d - that._n * _d,
+        _d * that._d)
 
     def *(that: Rational) =
-      new Rational(numerator * that.numerator, denominator * that.denominator)
+      new Rational(_n * that._n, _d * that._d)
 
     def /(that: Rational) =
-      new Rational(numerator * that.denominator, denominator * that.numerator)
+      new Rational(_n * that._d, _d * that._n)
 
     def reciprocal() =
-      new Rational(denominator, numerator)
+      new Rational(_d, _n)
 
     def negate() =
-      new Rational(-numerator, denominator)
+      new Rational(-_n, _d)
 
     // RationalClass.Comparisons
-    def compare(that: Rational) = numerator * that.denominator - that.numerator * denominator
+    def compare(that: Rational) = _n * that._d - that._n * _d
 
     // RationalClass.Objects
     override def equals(o: Any) = o match {
@@ -71,7 +71,7 @@ package object rational {
       case _ => false
     }
 
-    override def hashCode = (numerator.hashCode, denominator.hashCode) hashCode
+    override def hashCode = (_n.hashCode, _d.hashCode) hashCode
 
     // RationalClass.Done
   }

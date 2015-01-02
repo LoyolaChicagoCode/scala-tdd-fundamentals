@@ -25,20 +25,20 @@ class RationalScalaTestFlatSpecMatchers extends FlatSpec with Matchers {
   // RationalFlatSpec.Initializing
   "Initializing" should "reduce positive numerator and positive denominator" in {
     val r1 = new Rational(2, 4)
-    r1.numerator should be(1)
-    r1.denominator should be(2)
+    r1._n should be(1)
+    r1._d should be(2)
   }
 
   it should "reduce negative numerator and positive denominator" in {
     val r1 = new Rational(-2, 4)
-    r1.numerator should be(-1)
-    r1.denominator should be(2)
+    r1._n should be(-1)
+    r1._d should be(2)
   }
 
   it should "reduce negative numerator and negative denominator" in {
     val r1 = new Rational(-3, -6)
-    r1.numerator should be(1)
-    r1.denominator should be(2)
+    r1._n should be(1)
+    r1._d should be(2)
   }
 
   it should "not allow a zero denominator" in {
