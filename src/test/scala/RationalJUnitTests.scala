@@ -42,8 +42,7 @@ class RationalJUnitTests {
   @Test(expected = classOf[ArithmeticException])
   def testZeroDenominator(): Unit = {
     val r4 = new Rational(1, 0)
-    assertEquals(1, r4._n)
-    assertEquals(0, r4._d)
+    assertTrue(false) // should not get here!
   }
   // RationalJUnitTests.Arithmetic
   @Test
