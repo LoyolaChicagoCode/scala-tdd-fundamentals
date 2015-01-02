@@ -4,7 +4,8 @@ import org.scalatest._
 
 import rational._
 
-class RationalScalaTestFlatSpecMatchers extends FlatSpec with Matchers {
+class RationalScalaTestFlatSpecMatchers extends FlatSpec
+  with Matchers {
 
   // RationalFlatSpec.GCD
   "GCD involving 0" should "give y for gcd(0, y)" in {
