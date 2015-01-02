@@ -35,6 +35,15 @@ class RationalJUnitTests {
     val r3 = new Rational(-3, -6)
     assertEquals(1, r3.numerator)
     assertEquals(2, r3.denominator)
+
+    try {
+      val r4 = new Rational(1, 0)
+      assertEquals(0, r4.denominator)
+    } catch {
+      case ArithmeticException => assertTrue(true)
+        _ => ??? // won't happen
+    }
+
   }
 
   // RationalJUnitTests.Arithmetic
@@ -65,5 +74,6 @@ class RationalJUnitTests {
     assert(r2 <= r3)
     assert(r3 >= r2)
   }
+
   // RationalJUnitTests.Done
 }

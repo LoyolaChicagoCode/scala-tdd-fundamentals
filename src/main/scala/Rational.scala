@@ -3,31 +3,34 @@ package scalatddpackt
 package object rational {
 
 
-/*
- * This version of Rational is based on Martin Odersky's Scala by Example.
- * source: http://www.scala-lang.org/docu/files/ScalaByExample.pdf
- *
- * We include a number of additions/improvements based on Harrington and Thiruvathukal's C# Book,
- * which includes an elaboration of other needed methods and full unit tests.
- * source: http://introcs.cs.luc.edu
- */
+  /*
+   * This version of Rational is based on Martin Odersky's Scala by Example.
+   * source: http://www.scala-lang.org/docu/files/ScalaByExample.pdf
+   *
+   * We include a number of additions/improvements based on Harrington and Thiruvathukal's C# Book,
+   * which includes an elaboration of other needed methods and full unit tests.
+   * source: http://introcs.cs.luc.edu
+   */
 
-// begin-RationalMathUtility-gcd
+  // begin-RationalMathUtility-gcd
   def gcd(x: Int, y: Int): Int = {
     if (x == 0) y
     else if (x < 0) gcd(-x, y)
     else if (y < 0) -gcd(x, -y)
     else gcd(y % x, x)
   }
-// end-RationalMathUtility-gcd
 
-  // making it look like case class but totally orthogonal/optional
+  // end-RationalMathUtility-gcd
+
+  // begin-RationalObject
   object Rational {
     def apply(n: Int, d: Int) = new Rational(n, d)
+
     def unapply(r: Rational): Option[(Int, Int)] = Some((r.numerator, r.denominator))
   }
+  // end-RationalObject
 
-// begin-RationalClass
+  // begin-RationalClass
   class Rational(n: Int, d: Int) extends Ordered[Rational] {
 
     private val g = gcd(n, d)
@@ -35,8 +38,8 @@ package object rational {
     // RationalClass.Initialization
     val numerator: Int = n / g
     val denominator: Int = d / g
-    if (denominator == 0)
-      throw new ArithmeticException()
+    if (denominator == 0) ¬
+    throw new ArithmeticException()
 
     // RationalClass.Arithmetic
     def +(that: Rational) =
@@ -72,6 +75,7 @@ package object rational {
 
     // RationalClass.Done
   }
+
   // end-RationalClass
 
 }
