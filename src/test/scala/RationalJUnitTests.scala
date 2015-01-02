@@ -35,7 +35,7 @@ class RationalJUnitTests {
     val r3 = new Rational(-3, -6)
     assertEquals(1, r3._n)
     assertEquals(2, r3._d)
-    
+
   }
 
   // RationalJUnitTests.Arithmetic

@@ -23,25 +23,25 @@ class RationalScalaTestFlatSpecMatchers extends FlatSpec with Matchers {
     gcd(5 * 1, 5 * 5) should be(5)
   }
   // RationalFlatSpec.Initializing
-  "Initializing" should "reduce positive numerator and positive denominator" in {
+  "Initializing" should "reduce fractions (+,+)" in {
     val r1 = new Rational(2, 4)
     r1._n should be(1)
     r1._d should be(2)
   }
 
-  it should "reduce negative numerator and positive denominator" in {
+  it should "reduce fractions (-,+)" in {
     val r1 = new Rational(-2, 4)
     r1._n should be(-1)
     r1._d should be(2)
   }
 
-  it should "reduce negative numerator and negative denominator" in {
+  it should "reduce fractions (-,-)" in {
     val r1 = new Rational(-3, -6)
     r1._n should be(1)
     r1._d should be(2)
   }
 
-  it should "not allow a zero denominator" in {
+  it should "prohibit zero denominator" in {
     intercept[ArithmeticException] {
       new Rational(3, 0)
     }
