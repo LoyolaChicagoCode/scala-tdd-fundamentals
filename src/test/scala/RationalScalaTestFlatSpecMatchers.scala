@@ -155,7 +155,6 @@ class RationalScalaTestFlatSpecMatchers extends FlatSpec
       case _ => ()
     }
   }
-
   // RationalFlatSpec.End
 
 }

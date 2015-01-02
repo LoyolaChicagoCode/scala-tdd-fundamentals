@@ -3,7 +3,6 @@ package scalatddpackt
 import org.junit._
 import org.junit.Test
 import org.junit.Assert._
-import java.lang.ArithmeticException
 
 import rational._
 
