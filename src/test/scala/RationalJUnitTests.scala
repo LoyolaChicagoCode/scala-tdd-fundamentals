@@ -3,6 +3,7 @@ package scalatddpackt
 import org.junit._
 import org.junit.Test
 import org.junit.Assert._
+import java.lang.ArithmeticException
 
 import rational._
 
@@ -38,6 +39,12 @@ class RationalJUnitTests {
 
   }
 
+  @Test(expected = classOf[ArithmeticException])
+  def testZeroDenominator(): Unit = {
+    val r4 = new Rational(1, 0)
+    assertEquals(1, r4._n)
+    assertEquals(0, r4._d)
+  }
   // RationalJUnitTests.Arithmetic
   @Test
   def TestArithmetic(): Unit = {
