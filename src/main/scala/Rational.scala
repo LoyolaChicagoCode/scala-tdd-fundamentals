@@ -38,8 +38,8 @@ package object rational {
     // RationalClass.Initialization
     val _n: Int = n / g
     val _d: Int = d / g
-    if (_d == 0)
-      throw new ArithmeticException()
+    // perform test quotient for possible ArithmeticException
+    val _q = _n / _d
 
     // RationalClass.Arithmetic
     def +(that: Rational) =
