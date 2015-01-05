@@ -27,6 +27,8 @@ public class JRational implements Comparable<JRational> {
 
     private int _n, _d, _q;
 
+    // JavaRationalClass.Initialization
+
     public JRational(int n, int d) throws ArithmeticException {
         int g = gcd(n, d);
         _n = n / g;
