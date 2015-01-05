@@ -11,7 +11,7 @@ import scalatddpackt.JRational
 class JavaRationalJUnitTests {
 
 
-  // RationalJUnitTests.gcd
+  // JavaRationalJUnitTests.gcd
   @Test
   def testMathUtilities(): Unit = {
     import JRational.gcd
@@ -26,7 +26,7 @@ class JavaRationalJUnitTests {
   }
 
 
-  // RationalJUnitTests.Initialization
+  // JavaRationalJUnitTests.Initialization
   @Test
   def testInitialization(): Unit = {
     val r1 = new JRational(2, 4)
@@ -42,7 +42,7 @@ class JavaRationalJUnitTests {
     assertEquals(2, r3.getD)
   }
 
-  // RationalJUnitTests.Initialization
+  // JavaRationalJUnitTests.Initialization
   @Test
   def testInitialization2(): Unit = {
     val r1 = new JRational(2, 4)
@@ -64,7 +64,7 @@ class JavaRationalJUnitTests {
     val r4 = new JRational(1, 0)
     fail("Zero demoninator was accepted " + r4.getD)
   }
-  // RationalJUnitTests.Arithmetic
+  // JavaRationalJUnitTests.Arithmetic
   @Test
   def TestArithmetic(): Unit = {
     val r1 = new JRational(47, 64)
@@ -78,7 +78,7 @@ class JavaRationalJUnitTests {
     assert(r2.negate() == new JRational(11, 64))
   }
 
-  // RationalJUnitTests.Comparisons
+  // JavaRationalJUnitTests.Comparisons
   @Test
   def TestComparisons() {
     val r1 = new JRational(-3, 6)
@@ -89,6 +89,6 @@ class JavaRationalJUnitTests {
     assert(r2.compareTo(r3) == 0)
   }
 
-  // RationalJUnitTests.Done
+  // JavaRationalJUnitTests.Done
 
 }
