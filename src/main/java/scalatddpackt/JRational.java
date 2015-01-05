@@ -6,7 +6,11 @@ package scalatddpackt;
 
 import java.util.Arrays;
 
+// begin-JavaRationalClass
+
 public class JRational implements Comparable<JRational> {
+
+    // begin-RationalMathUtility-gcd
 
     public static int gcd(int x, int y) {
         if (x == 0)
@@ -19,6 +23,8 @@ public class JRational implements Comparable<JRational> {
             return gcd(y % x, x);
     }
 
+    // end-RationalMathUtility-gcd
+
     private int _n, _d, _q;
 
     public JRational(int n, int d) throws ArithmeticException {
@@ -28,6 +34,8 @@ public class JRational implements Comparable<JRational> {
         _q = n / d;
     }
 
+    // JavaRationalClass.Boilerplate
+
     public int getN() {
         return _n;
     }
@@ -35,6 +43,8 @@ public class JRational implements Comparable<JRational> {
     public int getD() {
         return _d;
     }
+
+    // JavaRationalClass.Arithmetic
 
     public JRational add(JRational that) {
         return new JRational(_n * that._d + that._n * _d,
@@ -64,15 +74,19 @@ public class JRational implements Comparable<JRational> {
         return new JRational(-_n, _d);
     }
 
+    // JavaRationalClass.Comparisons
+    @Override
+    public int compareTo(JRational that) {
+        return _n * that._d - that._n * _d;
+    }
+
+
+    // JavaRationalClass.Objects
+
     @Override
     public int hashCode() {
         int[] pair = { _n, _d };
         return Arrays.hashCode(pair);
-    }
-
-    @Override
-    public int compareTo(JRational that) {
-        return _n * that._d - that._n * _d;
     }
 
     @Override
@@ -83,3 +97,6 @@ public class JRational implements Comparable<JRational> {
             return false;
     }
 }
+
+// end-JavaRationalClass
+
