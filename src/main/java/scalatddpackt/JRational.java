@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 public class JRational implements Comparable<JRational> {
 
-    // begin-RationalMathUtility-gcd
+    // begin-JavaRationalMathUtility-gcd
 
     public static int gcd(int x, int y) {
         if (x == 0)
@@ -23,7 +23,7 @@ public class JRational implements Comparable<JRational> {
             return gcd(y % x, x);
     }
 
-    // end-RationalMathUtility-gcd
+    // end-JavaRationalMathUtility-gcd
 
     private int _n, _d, _q;
 
