@@ -43,7 +43,7 @@ class RationalScalaTestFlatSpecMatchers extends FlatSpec
   }
 
   it should "prohibit zero denominator" in {
-    intercept[ArithmeticException] {
+    a [ArithmeticException] should be thrownBy {
       new Rational(3, 0)
     }
   }

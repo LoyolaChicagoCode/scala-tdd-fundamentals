@@ -2,7 +2,6 @@ package scalatddpackt
 
 package object rational {
 
-
   /*
    * This version of Rational is based on Martin Odersky's Scala by Example.
    * source: http://www.scala-lang.org/docu/files/ScalaByExample.pdf
@@ -43,12 +42,16 @@ package object rational {
 
     // RationalClass.Arithmetic
     def +(that: Rational) =
-      new Rational(_n * that._d + that._n * _d,
-        _d * that._d)
+      new Rational(
+        _n * that._d + that._n * _d,
+        _d * that._d
+      )
 
     def -(that: Rational) =
-      new Rational(_n * that._d - that._n * _d,
-        _d * that._d)
+      new Rational(
+        _n * that._d - that._n * _d,
+        _d * that._d
+      )
 
     def *(that: Rational) =
       new Rational(_n * that._n, _d * that._d)
@@ -68,7 +71,7 @@ package object rational {
     // RationalClass.Objects
     override def equals(o: Any) = o match {
       case that: Rational => compare(that) == 0
-      case _ => false
+      case _              => false
     }
 
     override def hashCode = (_n.hashCode, _d.hashCode) hashCode
