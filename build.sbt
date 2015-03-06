@@ -1,9 +1,11 @@
 name := "SimpleTesting"
 
-version := "1.0"
+version := "1.0.1"
 
 scalaVersion := "2.11.6"
 
-libraryDependencies += "com.novocode" % "junit-interface" % "0.11" % "test"
+scalacOptions ++= Seq("-unchecked", "-feature", "-deprecation")
 
-libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.1" % "test"
+libraryDependencies += "com.novocode" % "junit-interface" % "0.11" % Test
+
+libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.4" % Test

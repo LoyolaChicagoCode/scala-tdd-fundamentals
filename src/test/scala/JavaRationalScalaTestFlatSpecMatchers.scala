@@ -1,7 +1,6 @@
-
 import org.scalatest._
-
 import scalatddpackt._
+import scalatddpackt.JRational.gcd
 
 
 class JRationalScalaTestFlatSpecMatchers extends FlatSpec

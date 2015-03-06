@@ -1,12 +1,6 @@
 import org.junit.Assert._
 import org.junit.Test
-
 import scalatddpackt.JRational
-
-/**
- * Created by gkt on 1/5/15.
- */
-
 
 class JavaRationalJUnitTests {
 
@@ -66,7 +60,7 @@ class JavaRationalJUnitTests {
   }
   // JavaRationalJUnitTests.Arithmetic
   @Test
-  def TestArithmetic(): Unit = {
+  def testArithmetic(): Unit = {
     val r1 = new JRational(47, 64)
     val r2 = new JRational(-11, 64)
 
@@ -80,7 +74,7 @@ class JavaRationalJUnitTests {
 
   // JavaRationalJUnitTests.Comparisons
   @Test
-  def TestComparisons() {
+  def testComparisons() {
     val r1 = new JRational(-3, 6)
     val r2 = new JRational(2, 4)
     val r3 = new JRational(1, 2)

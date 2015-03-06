@@ -74,7 +74,7 @@ package object rational {
       case _              => false
     }
 
-    override def hashCode = (_n.hashCode, _d.hashCode) hashCode
+    override def hashCode = (_n.hashCode, _d.hashCode).hashCode
     // RationalClass.Done
   }
 

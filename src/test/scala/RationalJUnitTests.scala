@@ -1,10 +1,7 @@
-package scalatddpackt
-
 import org.junit._
 import org.junit.Test
 import org.junit.Assert._
-
-import rational._
+import scalatddpackt.rational._
 
 
 class RationalJUnitTests {
@@ -45,7 +42,7 @@ class RationalJUnitTests {
   }
   // RationalJUnitTests.Arithmetic
   @Test
-  def TestArithmetic(): Unit = {
+  def testArithmetic(): Unit = {
     val r1 = new Rational(47, 64)
     val r2 = new Rational(-11, 64)
 
@@ -59,7 +56,7 @@ class RationalJUnitTests {
 
   // RationalJUnitTests.Comparisons
   @Test
-  def TestComparisons() {
+  def testComparisons() {
     val r1 = new Rational(-3, 6)
     val r2 = new Rational(2, 4)
     val r3 = new Rational(1, 2)

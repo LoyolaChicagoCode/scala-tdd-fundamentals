@@ -1,8 +1,5 @@
-package scalatddpackt
-
 import org.scalatest._
-
-import rational._
+import scalatddpackt.rational._
 
 class RationalScalaTestFlatSpecMatchers extends FlatSpec
   with Matchers {
