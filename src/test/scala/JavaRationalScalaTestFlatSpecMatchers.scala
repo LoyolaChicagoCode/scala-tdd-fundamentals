@@ -3,7 +3,7 @@ import scalatddpackt._
 import scalatddpackt.JRational.gcd
 
 
-class JRationalScalaTestFlatSpecMatchers extends FlatSpec
+class JavaRationalScalaTestFlatSpecMatchers extends FlatSpec
 with Matchers {
 
   // JRationalFlatSpec.GCD
