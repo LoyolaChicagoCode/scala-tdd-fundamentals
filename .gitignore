@@ -23,6 +23,7 @@ local.properties
 .classpath
 .project
 .settings/
+.sbtserver/
 
 # Emacs files
 *~
