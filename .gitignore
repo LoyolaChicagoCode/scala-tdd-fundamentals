@@ -13,7 +13,6 @@ bin/
 gen/
 proguard_cache/
 target/
-project/
 tmp/
 .idea/
 
@@ -23,7 +22,8 @@ local.properties
 .classpath
 .project
 .settings/
-.sbtserver/
+.sbtserver
+project/.sbtserver*
 
 # Emacs files
 *~
