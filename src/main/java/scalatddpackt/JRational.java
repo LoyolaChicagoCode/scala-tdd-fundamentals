@@ -10,6 +10,14 @@ import java.util.Arrays;
 
 public class JRational implements Comparable<JRational> {
 
+    /* Python Fractions gcd() works as follows:
+    Return the greatest common divisor of the integers a and b. If either a or b is nonzero, then the absolute
+    value of gcd(a, b) is the largest integer that divides both a and b. gcd(a,b) has the same sign as b if b is
+    nonzero; otherwise it takes the sign of a. gcd(0, 0) returns 0.
+
+    Martin's implementation follows this.
+    */
+
     // begin-JavaRationalMathUtility-gcd
 
     public static int gcd(int x, int y) {
@@ -25,61 +33,61 @@ public class JRational implements Comparable<JRational> {
 
     // end-JavaRationalMathUtility-gcd
 
-    private int _n, _d, _q;
+    private int numerator, denominator, testQuotient;
 
     // JavaRationalClass.Initialization
 
-    public JRational(int n, int d) throws ArithmeticException {
-        int g = gcd(n, d);
-        _n = n / g;
-        _d = d / g;
-        _q = n / d;
+    public JRational(int initialNumerator, int initialDenominator) throws ArithmeticException {
+        int g = gcd(initialNumerator, initialDenominator);
+        numerator = initialNumerator / g;
+        denominator = initialDenominator / g;
+        testQuotient = initialNumerator / initialDenominator;
     }
 
     // JavaRationalClass.Boilerplate
 
     public int getN() {
-        return _n;
+        return numerator;
     }
 
     public int getD() {
-        return _d;
+        return denominator;
     }
 
     // JavaRationalClass.Arithmetic
 
     public JRational add(JRational that) {
-        return new JRational(_n * that._d + that._n * _d,
-                _d * that._d);
+        return new JRational(numerator * that.denominator + that.numerator * denominator,
+                denominator * that.denominator);
     }
 
     public JRational subtract(JRational that) {
-        return new JRational(_n * that._d - that._n * _d,
-                _d * that._d);
+        return new JRational(numerator * that.denominator - that.numerator * denominator,
+                denominator * that.denominator);
 
     }
 
     public JRational multiply(JRational that) {
-        return new JRational(_n * that._n, _d * that._d);
+        return new JRational(numerator * that.numerator, denominator * that.denominator);
     }
 
     public JRational divide(JRational that) {
-        return new JRational(_n * that._d, _d * that._n);
+        return new JRational(numerator * that.denominator, denominator * that.numerator);
 
     }
 
     public JRational reciprocal() {
-        return new JRational(_d, _n);
+        return new JRational(denominator, numerator);
     }
 
     public JRational negate() {
-        return new JRational(-_n, _d);
+        return new JRational(-numerator, denominator);
     }
 
     // JavaRationalClass.Comparisons
     @Override
     public int compareTo(JRational that) {
-        return _n * that._d - that._n * _d;
+        return numerator * that.denominator - that.numerator * denominator;
     }
 
 
@@ -87,7 +95,7 @@ public class JRational implements Comparable<JRational> {
 
     @Override
     public int hashCode() {
-        int[] pair = { _n, _d };
+        int[] pair = { numerator, denominator};
         return Arrays.hashCode(pair);
     }
 
