@@ -34,11 +34,11 @@ public class JRational implements Comparable<JRational> {
     // end-JavaRationalMathUtility-gcd
 
     private int numerator, denominator, testQuotient;
-
+    private int g = 1;
     // JavaRationalClass.Initialization
 
     public JRational(int initialNumerator, int initialDenominator) throws ArithmeticException {
-        int g = gcd(initialNumerator, initialDenominator);
+        g = gcd(initialNumerator, initialDenominator);
         numerator = initialNumerator / g;
         denominator = initialDenominator / g;
         testQuotient = initialNumerator / initialDenominator;
