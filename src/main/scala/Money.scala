@@ -30,7 +30,11 @@ package object money {
 
     def /(n: Long) = Money(cents / n)
 
+    def /(that : Money) : Long = cents / that.cents
+
     def %(n: Long) = Money(cents % n)
+
+    def %(that : Money) = Money(cents % that.cents)
 
     override def equals(o: Any) = o match {
       case that: Money => compare(that) == 0

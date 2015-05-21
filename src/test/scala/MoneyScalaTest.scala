@@ -60,7 +60,10 @@ class MoneyTest extends FlatSpec with Matchers {
     m3 / 5 should be (getMoney(0.25))
     m3 % 5 should be (getMoney(0.01))
 
-
+    info("division involving Money")
+    m1 / m2 should be (5L)
+    m3 / m2 should be (5L)
+    m3 % m2 should be (getMoney(0.01))
   }
 
   "Within collections" should "work" in {
