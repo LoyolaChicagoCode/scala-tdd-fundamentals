@@ -106,6 +106,11 @@ public class JRational implements Comparable<JRational> {
         } else
             return false;
     }
+
+    @Override
+    public String toString() {
+        return "Rational(" + numerator + "/" + denominator + ";" + (numerator * g) + "/" + (denominator * g) + ")";
+    }
 }
 
 // end-JavaRationalClass

@@ -37,7 +37,7 @@ package object rational {
     // RationalClass.Initialization
     val numerator: Int = initNumerator / g
     val denominator: Int = initialDenominator / g
-    
+
     // perform test quotient for possible ArithmeticException
     val testQuotient = numerator / denominator
 
@@ -77,6 +77,11 @@ package object rational {
 
     override def hashCode = (numerator.hashCode, denominator.hashCode).hashCode
     // RationalClass.Done
+
+    override def toString(): String = s"Rational($numerator/$denominator; $initNumerator/$initialDenominator)"
+
+
+
   }
 
   // end-RationalClass
