@@ -2,14 +2,19 @@
  * Created by gkt on 5/18/15.
  */
 
+package scalatddpackt
+
 import math.abs
 
 package object money {
 
-  def getMoney(dollars: Long, cents : Long) : Money =
-    Money(100 * dollars + cents)
+  def getMoney(dollars: Long, cents: Long): Money =
+    if (dollars < 0 || cents < 0)
+      Money(-(100 * abs(dollars) + abs(cents)))
+    else
+      Money(100 * dollars + cents)
 
-  def getMoney(dollars : Double) : Money = {
+  def getMoney(dollars: Double): Money = {
     val sign = if (dollars < 0) -1 else 1
     val cents = 100L * (abs(dollars) + 0.0049)
     Money(sign * cents.toLong)
@@ -41,5 +46,4 @@ package object money {
       f"Money($d.$c%02d)"
     }
   }
-
 }
