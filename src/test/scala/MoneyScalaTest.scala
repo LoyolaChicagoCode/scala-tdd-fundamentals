@@ -53,11 +53,12 @@ class MoneyTest extends FlatSpec with Matchers {
 
     info("division without remainder")
     m1 / 5 should be (getMoney(0.25))
+    m1 % 5 should be (getMoney(0.00))
 
     info("division with remainder")
-    val m = m3 / 5
-    m should be (getMoney(0.25))
-    m.remainder should be(1)
+    val m = m3
+    m3 / 5 should be (getMoney(0.25))
+    m3 % 5 should be (getMoney(0.01))
 
 
   }

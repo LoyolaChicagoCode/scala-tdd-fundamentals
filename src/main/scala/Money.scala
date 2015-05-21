@@ -20,15 +20,17 @@ package object money {
     Money(sign * cents.toLong)
   }
 
-  case class Money(cents: Long, remainder: Long = 0L) extends Ordered[Money] {
+  case class Money(cents: Long) extends Ordered[Money] {
 
     def +(that: Money) = Money(cents + that.cents)
 
     def -(that: Money) = Money(cents - that.cents)
 
-    def *(n: Long) = Money(cents * n + remainder)
+    def *(n: Long) = Money(cents * n)
 
-    def /(n: Long) = Money(cents / n, cents % n)
+    def /(n: Long) = Money(cents / n)
+
+    def %(n: Long) = Money(cents % n)
 
     override def equals(o: Any) = o match {
       case that: Money => compare(that) == 0
