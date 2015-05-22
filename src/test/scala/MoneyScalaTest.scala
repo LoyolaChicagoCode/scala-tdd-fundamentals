@@ -67,6 +67,7 @@ class MoneyTest extends FlatSpec with Matchers {
   }
 
   "microtransactions with smaller fractions" should "also be supported" in {
+    info("using whole dollars and frations")
     // 0.315
     val m1 = getMoney(0, 315, 3)
     // 0.3
@@ -75,6 +76,13 @@ class MoneyTest extends FlatSpec with Matchers {
     (m1 + m2).precision should be(3)
     // sum has 615 "cents"; 0.615
     (m1 + m2).cents should be (615L)
+
+    info("using decimals")
+    val m3 = getDecimalMoney(1.125, 3)
+    val m4 = getDecimalMoney(1.5, 1)
+    (m3 + m4).precision should be (3)
+    (m3 + m4).cents should be (2625L)
+
   }
 
   "Within collections" should "work" in {
