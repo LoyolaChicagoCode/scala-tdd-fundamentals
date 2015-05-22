@@ -8,6 +8,8 @@ import math.{abs, pow}
 
 package object money {
 
+  // TODO: Change dollars to whole and cents to fraction (refactor)
+  // dollars and cents could become convenience methods or what not
   def getMoney(dollars: Long, cents: Long, precision : Int): Money = {
     require(precision > 0)
     val decimalMultiplier = math.pow(10, precision).toLong
@@ -28,6 +30,8 @@ package object money {
   }
 
   def getUSAMoney(dollars : Double) = getDecimalMoney(dollars, 2)
+
+  // TODO add version that constructs from String decimal rep
 
   case class Money(cents: Long, precision : Int) extends Ordered[Money] {
 

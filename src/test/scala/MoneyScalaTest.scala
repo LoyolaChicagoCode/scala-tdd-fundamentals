@@ -90,8 +90,11 @@ class MoneyTest extends FlatSpec with Matchers {
     val m1 = getDecimalMoney(1.25, 2)
     val m2 = getDecimalMoney(1.35, 2)
     val m3 = getDecimalMoney(1.45, 2)
+    // m4 == m2
     val m4 = getDecimalMoney(1.35, 2)
+    // m5 == m2
     val m5 = getDecimalMoney(1.350, 3)
+    // m6 == m1
     val m6 = getDecimalMoney(1.2500, 4)
     val s = Set(m1, m2, m3, m4, m5, m6)
     assert(s.size == 3)
