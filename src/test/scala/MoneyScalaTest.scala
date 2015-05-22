@@ -71,7 +71,9 @@ class MoneyTest extends FlatSpec with Matchers {
     val m1 = getMoney(0, 315, 3)
     // 0.3
     val m2 = getMoney(0, 3, 1)
+    // sum has 3 digits precision, i.e. max(3, 1)
     (m1 + m2).precision should be(3)
+    // sum has 615 "cents"; 0.615
     (m1 + m2).cents should be (615L)
   }
 
