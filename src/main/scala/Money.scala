@@ -22,11 +22,12 @@ package object money {
     require(precision > 0)
     val decimalMultiplier = math.pow(10, precision).toLong // DRY (fix later)
     val doubleFudgeFactor = 49 / math.pow(10, precision + 2)
-    print(s"multipler $decimalMultiplier and fudge $doubleFudgeFactor")
     val sign = if (dollars < 0) -1 else 1
     val cents = decimalMultiplier * (abs(dollars) + doubleFudgeFactor)
     Money(sign * cents.toLong, precision)
   }
+
+  def getUSAMoney(dollars : Double) = getDecimalMoney(dollars, 2)
 
   case class Money(cents: Long, precision : Int) extends Ordered[Money] {
 
