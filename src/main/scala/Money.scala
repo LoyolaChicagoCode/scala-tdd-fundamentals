@@ -8,7 +8,7 @@ import math.{abs, pow}
 
 package object money {
 
-  def getMoney(dollars: Long, cents: Long, precision: Int = 2): Money = {
+  def getMoney(dollars: Long, cents: Long, precision : Int): Money = {
     require(precision > 0)
     val decimalMultiplier = math.pow(10, precision).toLong
     if (dollars < 0 || cents < 0)
@@ -18,10 +18,14 @@ package object money {
   }
 
   // TODO: Allow for money to be constructed from any level of precision
-  def getMoney(dollars: Double): Money = {
+  def getDecimalMoney(dollars: Double, precision : Int): Money = {
+    require(precision > 0)
+    val decimalMultiplier = math.pow(10, precision).toLong // DRY (fix later)
+    val doubleFudgeFactor = 49 / math.pow(10, precision + 2)
+    print(s"multipler $decimalMultiplier and fudge $doubleFudgeFactor")
     val sign = if (dollars < 0) -1 else 1
-    val cents = 100L * (abs(dollars) + 0.0049)
-    Money(sign * cents.toLong, 2)
+    val cents = decimalMultiplier * (abs(dollars) + doubleFudgeFactor)
+    Money(sign * cents.toLong, precision)
   }
 
   case class Money(cents: Long, precision : Int) extends Ordered[Money] {

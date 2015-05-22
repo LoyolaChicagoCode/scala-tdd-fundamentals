@@ -9,17 +9,17 @@ import scalatddpackt.money._
 class MoneyTest extends FlatSpec with Matchers {
   "factory methods" should "convert to cents properly" in {
     info("positive")
-    getMoney(1, 25).cents should be (125L)
-    getMoney(1.25).cents should be (125L)
-    getMoney(1.256).cents should be (126L)
-    getMoney(1.254).cents should be (125L)
+    getMoney(1, 25, 2).cents should be (125L)
+    getDecimalMoney(1.25, 2).cents should be (125L)
+    getDecimalMoney(1.256, 2).cents should be (126L)
+    getDecimalMoney(1.254, 2).cents should be (125L)
     info("negative")
-    getMoney(-1, 25).cents should be (-125L)
-    getMoney(1, -25).cents should be (-125L)
-    getMoney(-1, -25).cents should be (-125L)
-    getMoney(-1.25).cents should be (-125L)
-    getMoney(-1.256).cents should be (-126L)
-    getMoney(-1.254).cents should be (-125L)
+    getMoney(-1, 25, 2).cents should be (-125L)
+    getMoney(1, -25, 2).cents should be (-125L)
+    getMoney(-1, -25, 2).cents should be (-125L)
+    getDecimalMoney(-1.25, 2).cents should be (-125L)
+    getDecimalMoney(-1.256, 2).cents should be (-126L)
+    getDecimalMoney(-1.254, 2).cents should be (-125L)
 
   }
 
@@ -40,30 +40,30 @@ class MoneyTest extends FlatSpec with Matchers {
   }
 
   "arithmetic" should "work as expected" in {
-    val m1 = getMoney(1.25)
-    val m2 = getMoney(0.25)
-    val m3 = getMoney(1.26)
+    val m1 = getDecimalMoney(1.25, 2)
+    val m2 = getDecimalMoney(0.25, 2)
+    val m3 = getDecimalMoney(1.26, 2)
 
     info("addition and subtraction")
-    m1 + m2 should be (getMoney(1.50))
-    m1 - m2 should be (getMoney(1.00))
+    m1 + m2 should be (getDecimalMoney(1.50, 2))
+    m1 - m2 should be (getDecimalMoney(1.00, 2))
 
     info("multiplication")
-    m1 * 5 should be (getMoney(6.25))
+    m1 * 5 should be (getDecimalMoney(6.25, 2))
 
     info("division without remainder")
-    m1 / 5 should be (getMoney(0.25))
-    m1 % 5 should be (getMoney(0.00))
+    m1 / 5 should be (getDecimalMoney(0.25, 2))
+    m1 % 5 should be (getDecimalMoney(0.00, 2))
 
     info("division with remainder")
     val m = m3
-    m3 / 5 should be (getMoney(0.25))
-    m3 % 5 should be (getMoney(0.01))
+    m3 / 5 should be (getDecimalMoney(0.25, 2))
+    m3 % 5 should be (getDecimalMoney(0.01, 2))
 
     info("division involving Money")
     m1 / m2 should be (5L)
     m3 / m2 should be (5L)
-    m3 % m2 should be (getMoney(0.01))
+    m3 % m2 should be (getDecimalMoney(0.01, 2))
   }
 
   "microtransactions with smaller fractions" should "also be supported" in {
@@ -79,10 +79,10 @@ class MoneyTest extends FlatSpec with Matchers {
 
   "Within collections" should "work" in {
     info("on Set[Money]")
-    val m1 = getMoney(125)
-    val m2 = getMoney(135)
-    val m3 = getMoney(145)
-    val m4 = getMoney(135)
+    val m1 = getDecimalMoney(1.25, 2)
+    val m2 = getDecimalMoney(1.35, 2)
+    val m3 = getDecimalMoney(1.45, 2)
+    val m4 = getDecimalMoney(1.35, 2)
     val s = Set(m1, m2, m3, m4)
     assert(s.size == 3)
   }
