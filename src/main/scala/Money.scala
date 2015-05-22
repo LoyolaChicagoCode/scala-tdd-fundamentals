@@ -78,13 +78,21 @@ package object money {
     }
 
     override def equals(o: Any) = o match {
-      case that: Money => compare(that) == 0
+      case that: Money => {
+        balance(that) match {
+          case (left, right, precision) => left.compare (right) == 0
+        }
+      }
       case _ => false
     }
 
-    def compare(that: Money) = (cents - that.cents).toInt
+    def compare(that: Money) = {
+      balance(that) match {
+        case (left, right, precision) => (cents - that.cents).toInt
+      }
+    }
 
-    override def hashCode = cents.hashCode()
+    override def hashCode = (cents,precision).hashCode()
 
     override def toString(): String = {
       val decimalMultiplier = math.pow(10, precision).toLong
