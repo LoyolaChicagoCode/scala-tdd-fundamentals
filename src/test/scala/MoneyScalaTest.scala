@@ -24,9 +24,9 @@ class MoneyTest extends FlatSpec with Matchers {
   }
 
   "relational operators" should "work as expected" in {
-    val m1 = Money(125)
-    val m2 = Money(135)
-    val m3 = Money(125)
+    val m1 = Money(125, 2)
+    val m2 = Money(135, 2)
+    val m3 = Money(125, 2)
     info("less than/less than or equal")
     assert(m1 < m2)
     assert(m1 <= m2)
@@ -64,6 +64,15 @@ class MoneyTest extends FlatSpec with Matchers {
     m1 / m2 should be (5L)
     m3 / m2 should be (5L)
     m3 % m2 should be (getMoney(0.01))
+  }
+
+  "microtransactions with smaller fractions" should "also be supported" in {
+    // 0.315
+    val m1 = getMoney(0, 315, 3)
+    // 0.3
+    val m2 = getMoney(0, 3, 1)
+    (m1 + m2).precision should be(3)
+    (m1 + m2).cents should be (615L)
   }
 
   "Within collections" should "work" in {

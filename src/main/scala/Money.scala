@@ -4,37 +4,73 @@
 
 package scalatddpackt
 
-import math.abs
+import math.{abs, pow}
 
 package object money {
 
-  def getMoney(dollars: Long, cents: Long): Money =
+  def getMoney(dollars: Long, cents: Long, precision: Int = 2): Money = {
+    require(precision > 0)
+    val decimalMultiplier = math.pow(10, precision).toLong
     if (dollars < 0 || cents < 0)
-      Money(-(100 * abs(dollars) + abs(cents)))
+      Money(-(decimalMultiplier * abs(dollars) + abs(cents)), precision)
     else
-      Money(100 * dollars + cents)
+      Money(decimalMultiplier * dollars + cents, precision)
+  }
 
+  // TODO: Allow for money to be constructed from any level of precision
   def getMoney(dollars: Double): Money = {
     val sign = if (dollars < 0) -1 else 1
     val cents = 100L * (abs(dollars) + 0.0049)
-    Money(sign * cents.toLong)
+    Money(sign * cents.toLong, 2)
   }
 
-  case class Money(cents: Long) extends Ordered[Money] {
+  case class Money(cents: Long, precision : Int) extends Ordered[Money] {
 
-    def +(that: Money) = Money(cents + that.cents)
+    require(precision > 0)
 
-    def -(that: Money) = Money(cents - that.cents)
+    def decimalMultiplier = math.pow(10, precision).toLong
 
-    def *(n: Long) = Money(cents * n)
+    def dollarsOnly = cents / decimalMultiplier
 
-    def /(n: Long) = Money(cents / n)
+    def centsOnly = cents % decimalMultiplier
 
-    def /(that : Money) : Long = cents / that.cents
+    def maxPrecision(that: Money) = math.max(precision, that.precision)
 
-    def %(n: Long) = Money(cents % n)
+    def balance(that : Money) : (Money, Money, Int) = {
+      val lhs = this.toPrecision(maxPrecision(that))
+      val rhs = that.toPrecision(maxPrecision(that))
+      (lhs, rhs, maxPrecision(that))
+    }
 
-    def %(that : Money) = Money(cents % that.cents)
+    def +(that: Money) = {
+      balance(that) match {
+        case (left, right, precision) => Money(left.cents + right.cents, precision)
+      }
+    }
+
+    def -(that: Money) = {
+      balance(that) match {
+        case (left, right, precision) => Money(left.cents - right.cents, precision)
+      }
+    }
+
+    def *(n: Long) = Money(cents * n, precision)
+
+    def /(n: Long) = Money(cents / n, precision)
+
+    def /(that : Money) : Long = {
+      balance(that) match {
+        case (left, right, precision) => left.cents / right.cents
+      }
+    }
+
+    def %(n: Long) = Money(cents % n, precision)
+
+    def %(that : Money) = {
+      balance(that) match {
+        case (left, right, precision) => Money(left.cents % right.cents, precision)
+      }
+    }
 
     override def equals(o: Any) = o match {
       case that: Money => compare(that) == 0
@@ -46,10 +82,20 @@ package object money {
     override def hashCode = cents.hashCode()
 
     override def toString(): String = {
-      val d = cents / 100
-      val c = cents % 100
+      val decimalMultiplier = math.pow(10, precision).toLong
+      val d = cents / decimalMultiplier
+      val c = cents % decimalMultiplier
+      f"Money($d $c/$decimalMultiplier)"
+    }
 
-      f"Money($d.$c%02d)"
+    def toPrecision(newPrecision : Int) : Money = {
+
+      if (newPrecision == precision)
+        this
+      if (newPrecision >= precision)
+        getMoney(dollarsOnly, centsOnly * math.pow(10, newPrecision - precision).toLong, newPrecision)
+      else
+        getMoney(dollarsOnly, centsOnly / math.pow(10, precision - newPrecision).toLong, newPrecision)
     }
   }
 }
