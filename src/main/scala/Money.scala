@@ -45,7 +45,7 @@ package object money {
 
     def maxPrecision(that: Money) = math.max(precision, that.precision)
 
-    private def balance(that : Money) : (Money, Money, Int) = {
+    def balance(that : Money) : (Money, Money, Int) = {
       val lhs = this.toPrecision(maxPrecision(that))
       val rhs = that.toPrecision(maxPrecision(that))
       (lhs, rhs, maxPrecision(that))
@@ -106,7 +106,6 @@ package object money {
     }
 
     def toPrecision(newPrecision : Int) : Money = {
-
       if (newPrecision == precision)
         this
       if (newPrecision >= precision)
