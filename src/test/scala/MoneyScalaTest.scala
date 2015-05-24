@@ -101,10 +101,10 @@ class MoneyTest extends FlatSpec with Matchers {
   }
   
   "String contexts" should "parse currencies" in {
-    info("US Dollars ($)")
-    usd"$$1.25" + usd"$$1.50" should be (getMoney(2, 75, 2))
-    info("Euros (€)")
-    euro"€1,35" + euro"2,05" should be (getMoney(3, 40, 2))
+    info("US Dollars")
+    usd"1.25" + usd"1.50" should be (getMoney(2, 75, 2))
+    info("Euros")
+    euros"1,35" + euros"2,05" should be (getMoney(3, 40, 2))
   }
 
 }

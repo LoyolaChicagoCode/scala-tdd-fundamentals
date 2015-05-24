@@ -5,6 +5,8 @@
 package scalatddpackt
 
 import math.{abs, pow}
+import scala.util.Try
+import math.max
 
 package object money {
 
@@ -119,17 +121,17 @@ package object money {
   implicit class MoneyHelper(val sc: StringContext) extends AnyVal {
     def usd(args: Any*): Money = {
       val text = sc.parts.mkString
-      val dollars = """\$?(\d+)\.(\d+)""".r
+      val dollars = """(\d+)\.?(\d*)""".r
       text match {
-        case dollars(whole, fraction) => getMoney(whole.toLong, fraction.toLong, fraction.length)
+        case dollars(whole, fraction) => getMoney(whole.toLong, Try(fraction.toLong).getOrElse(0), max(fraction.length, 1))
       }
     }
 
-    def euro(args: Any*): Money = {
+    def euros(args: Any*): Money = {
       val text = sc.parts.mkString
-      val euros = """€?(\d+)\,(\d+)""".r
+      val euros = """(\d+)\,?(\d*)""".r
       text match {
-        case euros(whole, fraction) => getMoney(whole.toLong, fraction.toLong, fraction.length)
+        case euros(whole, fraction) => getMoney(whole.toLong, Try(fraction.toLong).getOrElse(0), max(fraction.length, 1))
       }
     }
     
