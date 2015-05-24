@@ -45,7 +45,7 @@ package object money {
 
     def maxPrecision(that: Money) = math.max(precision, that.precision)
 
-    def balance(that : Money) : (Money, Money, Int) = {
+    private def balance(that : Money) : (Money, Money, Int) = {
       val lhs = this.toPrecision(maxPrecision(that))
       val rhs = that.toPrecision(maxPrecision(that))
       (lhs, rhs, maxPrecision(that))
@@ -115,4 +115,27 @@ package object money {
         getMoney(dollarsOnly, centsOnly / math.pow(10, precision - newPrecision).toLong, newPrecision)
     }
   }
+  
+  // Start with really simple parsing...
+  implicit class MoneyHelper(val sc: StringContext) extends AnyVal {
+    def usd(args: Any*): Money = {
+      val text = sc.parts.mkString
+      val dollars = """\$?(\d+)\.(\d+)""".r
+      text match {
+        case dollars(whole, fraction) => getMoney(whole.toLong, fraction.toLong, fraction.length)
+      }
+    }
+
+    def euro(args: Any*): Money = {
+      val text = sc.parts.mkString
+      val euros = """€?(\d+)\,(\d+)""".r
+      text match {
+        case euros(whole, fraction) => getMoney(whole.toLong, fraction.toLong, fraction.length)
+      }
+    }
+    
+  }
+  
+  
+  //val x: JSONObject = json"{ a: $a }"
 }

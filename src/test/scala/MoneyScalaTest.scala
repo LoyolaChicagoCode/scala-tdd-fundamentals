@@ -99,5 +99,12 @@ class MoneyTest extends FlatSpec with Matchers {
     val s = Set(m1, m2, m3, m4, m5, m6)
     assert(s.size == 3)
   }
+  
+  "String contexts" should "parse currencies" in {
+    info("US Dollars ($)")
+    usd"$$1.25" + usd"$$1.50" should be (getMoney(2, 75, 2))
+    info("Euros (€)")
+    euro"€1,35" + euro"2,05" should be (getMoney(3, 40, 2))
+  }
 
 }
