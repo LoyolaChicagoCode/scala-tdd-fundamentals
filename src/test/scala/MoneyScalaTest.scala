@@ -105,6 +105,12 @@ class MoneyTest extends FlatSpec with Matchers {
     usd"1.25" + usd"1.50" should be (getMoney(2, 75, 2))
     info("Euros")
     euros"1,35" + euros"2,05" should be (getMoney(3, 40, 2))
+    info("making sure calculations work with contexts")
+    usd"1.00" should be (usd"0.01" * 100)
+    usd"1.00" should be (usd"0.05" * 20)
+    usd"1.00" should be (usd"0.10" * 10)
+    usd"1.00" should be (usd"0.25" * 4)
+    usd"1.00" should be (usd"0.50" * 2)
   }
 
 }
