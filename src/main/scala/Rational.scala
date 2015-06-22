@@ -27,6 +27,7 @@ package object rational {
 
     def unapply(r: Rational): Option[(Int, Int)] = Some((r.num, r.den))
   }
+
   // end-RationalObject
 
   // begin-RationalClass
@@ -35,8 +36,9 @@ package object rational {
     private val g = gcd(n, d)
 
     // these short names will help with formatting for the book
-    
+
     // RationalClass.Initialization
+
     val num: Int = n / g
     val den: Int = d / g
 
@@ -68,18 +70,46 @@ package object rational {
     // RationalClass.Objects
     override def equals(o: Any) = o match {
       case that: Rational => compare(that) == 0
-      case _              => false
+      case _ => false
     }
 
     override def hashCode = (num.hashCode, den.hashCode).hashCode
+
     // RationalClass.Done
 
-    override def toString(): String = s"Rational($num/$den; $n/$d)"
-
-
-
+    override def toString(): String = s"Rational($num/$den; $g)"
   }
 
   // end-RationalClass
 
+  // TODO Add unit tests for these.
+  // begin-RationalContext
+  implicit class RationalContext(val sc: StringContext) extends AnyVal {
+    def frac(args: Any*): Rational = {
+      val text = sc.parts.mkString
+      val fraction = """(\-?)(\d+)/(\d+)""".r
+      text match {
+        case fraction(sign, n, d) => {
+          val nSigned = if (sign == "-") -n.toInt else n.toInt
+          Rational(nSigned, d.toInt)
+        }
+      }
+    }
+
+    def dec(args: Any*): Rational = {
+      val text = sc.parts.mkString
+      val decimal = """(\-?)(\d+).(\d+)""".r
+      text match {
+        case decimal(sign, whole, fractional) => {
+          val signMultiplier = if (sign == "-") -1 else 1
+          val wr = Rational(signMultiplier * whole.toInt, 1)
+          val fr = Rational(signMultiplier * fractional.toInt, math.pow(10, fractional.length).toInt)
+          wr + fr
+        }
+      }
+    }
+  }
+  // end-RationalContext
+
 }
+
