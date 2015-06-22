@@ -152,6 +152,22 @@ class RationalScalaTestFlatSpecMatchers extends FlatSpec
       case _ => ()
     }
   }
-  // RationalFlatSpec.End
 
+  // RationalFlatSpec.Contexts
+
+  "String Contexts" should "work" in {
+    info("for decimal strings")
+    dec"1.25" should be (Rational(5, 4))
+    dec"-1.25" should be (Rational(-5, 4))
+    info("for fraction strings")
+    frac"5/4" should be (Rational(5, 4))
+    frac"-5/4" should be (Rational(-5, 4))
+    info("multiple decimal places")
+    dec"1.1" should be (Rational(11, 10))
+    dec"1.11" should be (Rational(111, 100))
+    dec"1.11111" should be (Rational(111111, 100000))
+
+  }
+  // RationalFlatSpec.End
 }
+
