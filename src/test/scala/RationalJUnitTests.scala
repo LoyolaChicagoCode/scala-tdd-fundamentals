@@ -22,23 +22,23 @@ class RationalJUnitTests {
   @Test
   def testInitialization(): Unit = {
     val r1 = new Rational(2, 4)
-    assertEquals(1, r1.numerator)
-    assertEquals(2, r1.denominator)
+    assertEquals(1, r1.num)
+    assertEquals(2, r1.den)
 
     val r2 = new Rational(-3, 6)
-    assertEquals(-1, r2.numerator)
-    assertEquals(2, r2.denominator)
+    assertEquals(-1, r2.num)
+    assertEquals(2, r2.den)
 
     val r3 = new Rational(-3, -6)
-    assertEquals(1, r3.numerator)
-    assertEquals(2, r3.denominator)
+    assertEquals(1, r3.num)
+    assertEquals(2, r3.den)
 
   }
 
   @Test(expected = classOf[ArithmeticException])
   def testZeroDenominator(): Unit = {
     val r4 = new Rational(1, 0)
-    fail("Zero demoninator was accepted " + r4.denominator)
+    fail("Zero demoninator was accepted " + r4.den)
   }
   // RationalJUnitTests.Arithmetic
   @Test

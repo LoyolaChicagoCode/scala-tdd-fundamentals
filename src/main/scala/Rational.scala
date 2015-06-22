@@ -25,49 +25,45 @@ package object rational {
   object Rational {
     def apply(n: Int, d: Int) = new Rational(n, d)
 
-    def unapply(r: Rational): Option[(Int, Int)] = Some((r.numerator, r.denominator))
+    def unapply(r: Rational): Option[(Int, Int)] = Some((r.num, r.den))
   }
   // end-RationalObject
 
   // begin-RationalClass
-  class Rational(initNumerator: Int, initialDenominator: Int) extends Ordered[Rational] {
+  class Rational(n: Int, d: Int) extends Ordered[Rational] {
 
-    private val g = gcd(initNumerator, initialDenominator)
+    private val g = gcd(n, d)
 
+    // these short names will help with formatting for the book
+    
     // RationalClass.Initialization
-    val numerator: Int = initNumerator / g
-    val denominator: Int = initialDenominator / g
+    val num: Int = n / g
+    val den: Int = d / g
 
     // perform test quotient for possible ArithmeticException
-    val testQuotient = numerator / denominator
+    val testQuotient = num / den
 
     // RationalClass.Arithmetic
     def +(that: Rational) =
-      new Rational(
-        numerator * that.denominator + that.numerator * denominator,
-        denominator * that.denominator
-      )
+      new Rational(num * that.den + that.num * den, den * that.den)
 
     def -(that: Rational) =
-      new Rational(
-        numerator * that.denominator - that.numerator * denominator,
-        denominator * that.denominator
-      )
+      new Rational(num * that.den - that.num * den, den * that.den)
 
     def *(that: Rational) =
-      new Rational(numerator * that.numerator, denominator * that.denominator)
+      new Rational(num * that.num, den * that.den)
 
     def /(that: Rational) =
-      new Rational(numerator * that.denominator, denominator * that.numerator)
+      new Rational(num * that.den, den * that.num)
 
     def reciprocal() =
-      new Rational(denominator, numerator)
+      new Rational(den, num)
 
     def negate() =
-      new Rational(-numerator, denominator)
+      new Rational(-num, den)
 
     // RationalClass.Comparisons
-    def compare(that: Rational) = numerator * that.denominator - that.numerator * denominator
+    def compare(that: Rational) = num * that.den - that.num * den
 
     // RationalClass.Objects
     override def equals(o: Any) = o match {
@@ -75,10 +71,10 @@ package object rational {
       case _              => false
     }
 
-    override def hashCode = (numerator.hashCode, denominator.hashCode).hashCode
+    override def hashCode = (num.hashCode, den.hashCode).hashCode
     // RationalClass.Done
 
-    override def toString(): String = s"Rational($numerator/$denominator; $initNumerator/$initialDenominator)"
+    override def toString(): String = s"Rational($num/$den; $n/$d)"
 
 
 
