@@ -103,7 +103,7 @@ package object rational {
         case decimal(sign, whole, fractional) => {
           val signMultiplier = if (sign == "-") -1 else 1
           val wr = Rational(signMultiplier * whole.toInt, 1)
-          val fr = Rational(signMultiplier * fractional.toInt, math.pow(10, fractional.length).toInt)
+          val fr = Rational(signMultiplier * fractional.toInt, ("1" + "0" * fractional.length).toInt)
           wr + fr
         }
       }
