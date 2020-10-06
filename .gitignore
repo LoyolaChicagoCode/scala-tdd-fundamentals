@@ -11,20 +11,29 @@
 # generated files
 bin/
 gen/
+logs/
 proguard_cache/
 target/
 tmp/
-.idea/
 
 # Local configuration file (sdk path, etc)
 local.properties
-.cache
+.cache/
 .classpath
 .project
 .settings/
-.sbtserver
-project/.sbtserver*
+*.iml
+.idea/
+local.sbt
+.bsp/
 
 # Emacs files
 *~
 \#*\#
+
+# Mac files
+.DS_Store
+
+# SBT configuration files
+# remove if specific version of SBT is required
+project/build.properties 
